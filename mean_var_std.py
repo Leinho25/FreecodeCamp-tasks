@@ -1,17 +1,16 @@
 import numpy as np
 
 def calculate(list):
-    if len(list)<9:
+    if len(list)!=9:
         return "List must contain nine numbers."
     else:
         A=np.reshape(list,(3,3))
-        AT=A.transpose()
-        Dictionary=dict([
-                        ("mean", [[AT[i].mean() for i in range(0,3)], [A[i].mean() for i in range(0,3)], A.mean()]),
-                        ("variance", [[AT[i].var() for i in range(0,3)], [A[i].var() for i in range(0,3)], A.var()]),
-                        ("standard deviation", [[AT[i].std() for i in range(0,3)], [A[i].std() for i in range(0,3)], A.std()]),
-                        ("max", [[AT[i].max() for i in range(0,3)], [A[i].max() for i in range(0,3)], A.max()]),
-                        ("min", [[AT[i].min() for i in range(0,3)], [A[i].min() for i in range(0,3)], A.min()]),
-                        ("sum", [[AT[i].sum() for i in range(0,3)], [A[i].sum() for i in range(0,3)], A.sum()])
+        calculates=dict([
+                        ("mean", [A.mean(axis=0).tolist(), A.mean(axis=1).tolist(), A.mean()]),
+                        ("variance", [A.var(axis=0).tolist(), A.var(axis=1).tolist(), A.var()]),
+                        ("standard deviation", [A.std(axis=0).tolist(), A.std(axis=1).tolist(), A.std()]),
+                        ("max", [A.max(axis=0).tolist(), A.max(axis=1).tolist(), A.max()]),
+                        ("min", [A.min(axis=0).tolist(), A.min(axis=1).tolist(), A.min()]),
+                        ("sum", [A.sum(axis=0).tolist(), A.sum(axis=1).tolist(), A.sum()])
         ])
-        return Dictionary
+        return calculates
